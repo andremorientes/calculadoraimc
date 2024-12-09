@@ -3,6 +3,7 @@ package com.comunidadedevspace.imc
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
@@ -20,16 +21,32 @@ class MainActivity : AppCompatActivity() {
         val btnCalcular: Button = findViewById(R.id.btn_calcular)
 
         btnCalcular.setOnClickListener {
-            val peso= edtPeso.text.toString()
-            val altura= edtAltura.text.toString()
 
-            calcularImc(peso.toDouble(), altura.toDouble())
+            val stringPeso: String = edtPeso.text.toString()
+            val stringAltura: String = edtAltura.text.toString()
+
+            if (stringPeso == "" || stringAltura == "") {
+                // Mostrar messagem para usuario
+                Snackbar.make(
+                    btnCalcular,
+                    "Preencha todos os campos",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+
+            } else {
+                //Recuperar os valores digitados pelo usuário na EditText
+                val peso = stringPeso.toFloat()
+                val altura = stringAltura.toFloat()
+
+
+                val alturaQ2 = altura * altura
+                val resultado = peso / alturaQ2
+            }
+
+
         }
 
     }
 
 
-    fun calcularImc(peso: Double, altura: Double): Double {
-        return peso / (altura * altura)
-    }
 }
