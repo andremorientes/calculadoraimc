@@ -20,16 +20,16 @@ class MainActivity : AppCompatActivity() {
         val btnCalcular: Button = findViewById(R.id.btn_calcular)
 
         btnCalcular.setOnClickListener {
-            val peso= edtPeso.text.toString()
-            val altura= edtAltura.text.toString()
+            val peso= edtPeso.text.toString().toFloat()
+            val altura= edtAltura.text.toString().toFloat()
 
-            calcularImc(peso.toDouble(), altura.toDouble())
+            val alturaQ2= altura * altura
+            val resultado = peso / alturaQ2
+
         }
 
     }
 
 
-    fun calcularImc(peso: Double, altura: Double): Double {
-        return peso / (altura * altura)
-    }
+
 }
